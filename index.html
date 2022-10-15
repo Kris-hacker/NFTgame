@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html style="background-color:black">
+  <head>
+    <title>Web3 GamFi</title>
+    <!--Google Font style-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!--CSS style-->
+    <link rel="stylesheet" href="style.css">
+    <!--jQuery CDN for insert the navbar-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--Web3 Wallet & Web3.js CDN for call the smart contract-->
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <!--IPFS Storage CDN for use the IPFS storage-->
+    <script src="https://cdn.jsdelivr.net/npm/ipfs/dist/index.min.js"></script>
+    <!--AlchemyWeb3.js NFT Api CDN for call the alchemy nft api-->
+    <script src="https://cdn.jsdelivr.net/npm/@alch/alchemy-web3@latest/dist/alchemyWeb3.min.js"></script>
+  </head>
+
+  <body style="background: url(https://i.redd.it/408ryru2vzty.jpg);background-size: cover;background-position: center;background-repeat: no-repeat;">
+    <!--NavBar-->
+    <div id="navbar"></div>
+    <script> 
+      $(function(){
+        $("#navbar").load("navbar.html"); 
+      });
+      </script> 
+    <!--Main content-->
+    <p id="title" style="text-align:center;font-family: 'Press Start 2P', cursive;color: #E0E0E0;font-size: 2.00em;">NFT Game</p>
+    <p style="text-align:center;font-family: 'Press Start 2P', cursive;color: #E0E0E0;font-size: 0.8em;">Contract: </p>
+    <div id="tetris">
+      <div id="menu">
+        <p onclick="walletLogin()" id="userAddress" style="cursor: pointer;padding: 5px;border:solid;font-size: 0.6em;font-family: 'Press Start 2P', cursive;">Connect Wallet</p> 
+        <p id="start" onclick="play()" id="logout" style="background-color: #04AA6D;cursor: pointer;padding: 10px;color: aliceblue;border:none;font-size: 0.7em;font-family: 'Press Start 2P', cursive;">Play</p> 
+      
+       
+        <p><canvas id="upcoming"></canvas></p>
+        <p style="font-family: 'Press Start 2P', cursive;">score<br> <span id="score" style="font-size: .7em;font-family: 'Press Start 2P', cursive;">000000</span></p>
+        <p style="font-family: 'Press Start 2P', cursive;">rows<br> <span id="rows" style="font-size: 0.7em;font-family: 'Press Start 2P', cursive;">0</span></p>
+        <p><button onclick="document.getElementById('id01').style.display='block'" style="cursor: pointer;padding: 10px;border:solid;font-size: 0.7em;font-family: 'Press Start 2P', cursive;">Create NFT</button></p>
+        <p onclick="logout()" id="logout" style="cursor: pointer;padding: 5px;border:solid;font-size: 0.5em;font-family: 'Press Start 2P', cursive;">Logout</p> 
+      </div>
+      <canvas id="canvas">
+        Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
+      </canvas>
+    </div>
+
+    <!--NFT create form-->
+
+    <div id="id01" class="modal" style="background-color:rgb(145, 113, 113);text-align: center;">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <a ><img id="nftimage" alt="Avatar" class="avatar" ></a>
+      </div>
+
+      <div class="container">
+
+        <label class="nftform" for="nft"><b>NFT Image File</b></label>
+        <input type="file" id="file" accept="image/*" class="nftinput" required><br><br>
+    
+        <label class="nftform" for="nft"><b>IPFS Image Url</b></label>
+        <input type="text" class="nftinput" id="ipfsImage" readonly><br><br>
+
+        <label class="nftform" for="filename"><b>Name</b></label>
+        <input type="text" id="filename" class="nftinput" placeholder="Enter your nft name" name="filename" required>
+
+        <label class="nftform" for="filesocre"><b>Score</b></label>
+        <input id="filescore" class="nftinput" type="text" placeholder="" name="filesocre" readonly>
+
+        <label class="nftform" for="fileraw"><b>Raw</b></label>
+        <input id="fileraws"  class="nftinput" type="text" placeholder="" name="fileraw" readonly>
+      
+        <label class="nftform"for="filedesc"><b>Description</b></label><br>
+        <textarea maxlength="500" id="desc"  class="nftinput" placeholder="I love this NFT !!!"></textarea>
+        <button id="downloadMetaData" onclick="setMetaData()"  style="cursor: pointer;padding: 20px;border:solid;font-size: 0.7em;font-family: 'Press Start 2P', cursive;">Download Metadata</button>
+        <hr><br>
+        
+        <label class="nftform" for="nft"><b>NFT Metadata File</b></label>
+        <input type="file" id="fileMetaData" accept=".json" class="nftinput" required><br><br>
+
+        <label class="nftform" for="nft"><b>IPFS Metadata Url</b></label>
+        <input type="text" class="nftinput" id="ipfsMetaData" readonly><br><br>
+
+        <button id="uploadMetaData" style="cursor: pointer;padding: 20px;border:solid;font-size: 0.7em;font-family: 'Press Start 2P', cursive;">Create NFT & Upload to Blockchain</button>
+ 
+    </div>
+
+    
+    
+    <!--Web3 NFT game components (don't move these script)-->
+    <script src="stats.js"></script>
+    <script src="wallet.js"></script>
+    <script src="game.js"></script>
+    <script src="navbar.js"></script>
+    <script src="ipfs.js"></script>
+
+  </body>
+</html>
