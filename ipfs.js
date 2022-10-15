@@ -10,7 +10,7 @@ async function upload() {
     //  Listen for the onload event
    
     fileReader.onload = async (event) => {            
-        const node = await Ipfs.create()
+        const node = await Ipfs.create({repo: 'ok' + Math.random()})
         // upload the file content
         console.log(fileReader.result)
         let { path } = await node.add(fileReader.result)
@@ -30,7 +30,7 @@ async function uploadMetaData() {
     //  Listen for the onload event
    
     fileReader.onload = async (event) => {            
-        const node = await Ipfs.create()
+        const node = await Ipfs.create({repo: 'ok' + Math.random()})
         // upload the file content
         console.log(fileReader.result)
         let { path } = await node.add(fileReader.result)
