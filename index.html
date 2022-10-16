@@ -28,10 +28,10 @@
       </script> 
     <!--Main content-->
     <p id="title" style="text-align:center;font-family: 'Press Start 2P', cursive;color: #E0E0E0;font-size: 2.00em;">NFT Game</p>
-    <p style="text-align:center;font-family: 'Press Start 2P', cursive;color: #E0E0E0;font-size: 0.8em;">Contract: </p>
+    <p style="text-align:center;font-family: 'Press Start 2P', cursive;color: #E0E0E0;font-size: 0.8em;">Contract: 0xd2AB40279c57CCa86Ee5C8C0D1BFAd523E3c59E7</p>
     <div id="tetris">
       <div id="menu">
-        <p onclick="walletLogin()" id="userAddress" style="cursor: pointer;padding: 5px;border:solid;font-size: 0.6em;font-family: 'Press Start 2P', cursive;">Connect Wallet</p> 
+        <p onclick="walletLogin()" id="userAddress" style="cursor: pointer;padding: 5px;border:solid;font-size: 0.25em;font-family: 'Press Start 2P', cursive;">Connect Wallet</p> 
         <p id="start" onclick="play()" id="logout" style="background-color: #04AA6D;cursor: pointer;padding: 10px;color: aliceblue;border:none;font-size: 0.7em;font-family: 'Press Start 2P', cursive;">Play</p> 
       
        
@@ -82,9 +82,12 @@
         <label class="nftform" for="nft"><b>IPFS Metadata Url</b></label>
         <input type="text" class="nftinput" id="ipfsMetaData" readonly><br><br>
 
-        <button id="uploadMetaData" style="cursor: pointer;padding: 20px;border:solid;font-size: 0.7em;font-family: 'Press Start 2P', cursive;">Create NFT & Upload to Blockchain</button>
+        <button id="uploadMetaData" onclick="createNFT()" style="cursor: pointer;padding: 20px;border:solid;font-size: 0.7em;font-family: 'Press Start 2P', cursive;">Create NFT & Upload to Blockchain</button>
  
     </div>
+    <script>
+      
+    </script>
 
     
     
@@ -94,6 +97,7 @@
     <script src="game.js"></script>
     <script src="navbar.js"></script>
     <script src="ipfs.js"></script>
+    <script src="alchemy.js"></script>
 
   </body>
 </html>

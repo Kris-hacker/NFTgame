@@ -21,8 +21,8 @@ async function walletLogin(){
     if (window.ethereum){
         const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
         const account = accounts[0];
-        window.userAddress = truncateAddress(account);
-        window.localStorage.setItem("userAddress",truncateAddress(account));
+        window.userAddress = account;
+        window.localStorage.setItem("userAddress",account);
         document.getElementById("userAddress").textContent = `${window.userAddress}`;
         console.log(document.getElementById("userAddress").value)
         //getBalance();
