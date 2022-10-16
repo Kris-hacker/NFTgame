@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html style="background-color:rgb(255, 255, 255)">
+  <head>
+    <title>Web3 GamFi</title>
+    <!--Google Font style-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!--CSS style-->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nftsearch.css" />
+    <!--jQuery CDN for insert the navbar-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--Web3 Wallet & Web3.js CDN for call the smart contract-->
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <!--IPFS Storage CDN for use the IPFS storage-->
+    <script src="https://cdn.jsdelivr.net/npm/ipfs/dist/index.min.js"></script>
+    <!--AlchemyWeb3.js NFT Api CDN for call the alchemy nft api-->
+    <script src="https://cdn.jsdelivr.net/npm/@alch/alchemy-web3@latest/dist/alchemyWeb3.min.js"></script>
+  </head>
+
+  <body onclick="getnft()">
+    <!--NavBar-->
+    <div id="navbar"></div>
+    <script> 
+      $(function(){
+        $("#navbar").load("navbar.html"); 
+      });
+      </script> 
+    <!--Main content-->
+    <p id="title" style="text-align:center;font-family: 'Press Start 2P', cursive;color: #000000;font-size: 2.00em;padding: 20px;">NFT Storage</p>
+    <p style="text-align:center;font-family: 'Press Start 2P', cursive;color: #000000;font-size: 0.7em;">Contract: 0xd2AB40279c57CCa86Ee5C8C0D1BFAd523E3c59E7</p><br>
+    <p style="text-align:center;font-family: 'Press Start 2P', cursive;color: #000000;font-size: 0.7em;">Total NFT : <samp id="count" style="text-align:center;font-family: 'Press Start 2P', cursive;color: #000000;font-size: 3em;"></samp></p>
+    <div class="container">
+
+        <div class="card">
+            <div id="nftcontent"></div>
+            <div class="card__header">
+                <img src="https://source.unsplash.com/600x400/?computer" alt="card__image" class="card__image" width="600">
+            </div>
+          <div class="card__body">
+            <div style="display:flex">
+                <span class="tag tag-blue">NFT</span>
+                <span class="tag tag-red">simToken</span>
+                <span class="tag tag-brown">Date</span>
+            </div>
+            <div style="padding-top: 10px;padding-bottom: 10px;">
+                <h4>What's new in 2022 Tech</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi perferendis molestiae non nemo doloribus. Doloremque, nihil! At ea atque quidem!</p>
+            </div>
+                <div class="user__info" >
+                    <div style="display:flex">
+                        <div>
+                            <h5>Score</h5>
+                            <small>2h ago</small>
+                            <h5>Raws</h5>
+                            <small>2h ago</small>
+                        </div>
+                        <div style="padding-left:40px;">
+                            <h5>Token ID</h5>
+                            <small>2h ago</small>
+                            <h5>Contract</h5>
+                            <small>2h ago</small>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div class="card__footer">
+                <div class="user">
+                    <div class="user__info">
+                    <h5>Owner</h5>
+                    <small>0x989423jdshf</small>
+                    </div>
+                </div>
+          </div>
+          <div class="card__footer">
+            <div class="user">
+              <div class="user__info">
+                <h5>IPFS CID</h5>
+                <small>sfnseufhseufhu</small>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+        
+       
+    </div>
+
+    <p id="userAddress" style="color:#FFF"></p>
+    <p id="userAddress2" style="color:#FFF"></p>
+ 
+
+    
+    
+    <!--Web3 NFT game components (don't move these script)-->
+    <script src="stats.js"></script>
+    <script src="wallet.js"></script>
+    <script src="game.js"></script>
+    <script src="navbar.js"></script>
+    <script src="ipfs.js"></script>
+    <script src="alchemy.js"></script>
+
+  </body>
+</html>

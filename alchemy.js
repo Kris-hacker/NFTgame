@@ -8,6 +8,7 @@ async function checkConnect() {
   
     const blockNumber = await web3.eth.getBlockNumber();
     console.log("My first exercise! The latest block number is " + blockNumber)
+    console.log( window.userAddress)
 
     // In the browser you can also output to the DOM:
     //document.getElementById("resultNFTcount").innerHTML += "My first exercise! The latest block number is " + blockNumber
@@ -18,6 +19,89 @@ async function createNFT(){
     console.log(document.getElementById("ipfsMetaData").value)
     mintNFT(tokenURI)
 }
+
+function nftchack(){
+    getnft()
+}
+
+async function getnft(){
+    const ownerAddr = document.getElementById("userAddress2").textContent;
+    const nfts = await web3.alchemy.getNfts({owner: ownerAddr})
+    // Print owner's wallet address:
+    console.log(nfts)
+
+
+    console.log("fetching NFTs for address:", ownerAddr);
+    console.log("...");
+    
+    // Print total NFT count returned in the response:
+    console.log("number of NFTs found:", nfts.totalCount);
+    
+    document.getElementById("count").textContent =  nfts.totalCount;
+    console.log("...");
+    console.log(nfts.totalCount);
+    // Print contract address and tokenId for each NFT:
+    for (const nft of nfts.ownedNfts) {
+        console.log("===");
+        console.log("name:", nft.metadata.name);
+        console.log("description:", nft.description);
+        console.log("score:", nft.metadata.attributes[0].value);
+        console.log("raws:", nft.metadata.attributes[1].value);
+        console.log("image:", nft.metadata.image);
+        console.log("create date:", nft.timeLastUpdated);
+        console.log("ipfs:", nft.tokenUri.gateway);
+        console.log("contract address:", nft.contract.address);
+        console.log("token ID:", nft.id.tokenId);
+        console.log("creater:", nft.contract.address);
+    }
+    console.log("===");
+    console.log(nfts);
+}
+
+async function getnftList(){
+    const ownerAddr = document.getElementById("userAddress2").textContent;
+    const nfts = await web3.alchemy.getNfts({owner: ownerAddr})
+
+    console.log("fetching NFTs for address:", ownerAddr);
+    console.log("...");
+    
+    // Print total NFT count returned in the response:
+    console.log("number of NFTs found:", nfts.totalCount);
+
+    // Print contract address and tokenId for each NFT:
+    let rs = "<table width=\"900px\">"
+    for (const nft of nfts.ownedNfts) {
+        console.log("===");
+        console.log("Title:", nft.title);
+        console.log("Description:", nft.description);
+        console.log("contract address:", nft.contract.address);
+        console.log("token ID:", nft.id.tokenId);
+        console.log("Image url:", nft.metadata.image);
+
+        // rs += "<div style=\"display:flex\">"+
+        //             "<div>"+
+        //                 "Title:"+nft.title+"<br>"+
+        //                 "Description:"+nft.description+"<br>"+
+        //                 "Contract address:"+nft.contract.address+"<br>"+
+        //                 "Token ID:"+nft.id.tokenId+"<br>"+
+        //                 "Image url:"+nft.metadata.image+"<br>"+
+                        
+        //             "</div>"+
+        //             "<div style=\"padding-left:10px\">"+
+        //                 "<img src=\""+nft.metadata.image+"\" width=\"190px\">"+                                  
+        //             "</div>"+
+        //         "</div>"+
+        //         "<hr style=\"margin-bottom:30px;padding-bottom:5px; background-color: white\" >";
+
+
+    }
+    // rs += "</table>"
+    // document.getElementById("NFT_list_details").innerHTML = rs;
+    console.log("===");
+    console.log(nfts);
+}
+
+
 
 async function mintNFT(tokenURI) {
     const web3 = AlchemyWeb3.createAlchemyWeb3(
@@ -405,8 +489,10 @@ async function mintNFT(tokenURI) {
     const contractAddress = "0xd2AB40279c57CCa86Ee5C8C0D1BFAd523E3c59E7";
     const nftContract = new web3.eth.Contract(contract.abi, contractAddress);
 
-    const PUBLIC_KEY = document.getElementById("userAddress").textContent;
+    const PUBLIC_KEY = document.getElementById("userAddress2").textContent;
     const PRIVATE_KEY = "d137d6296459d0a177ee425364457c5ae33b8aef1d44fe6d00c9826153d11cfb";
+
+    console.log(document.getElementById("userAddress2").textContent)
 
     const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, "latest") //get latest nonce
 
@@ -431,6 +517,7 @@ async function mintNFT(tokenURI) {
                 hash,
                 "\nCheck Alchemy's Mempool to view the status of your transaction!"
             )
+                document.getElementById("record").value = "https://goerli.etherscan.io/tx/" + hash ;
             console.log(hash)
             } else {
             console.log(
@@ -444,6 +531,5 @@ async function mintNFT(tokenURI) {
     .catch((err) => {
         console.log("Promise failed:", err)
     })
-
-
 }
+

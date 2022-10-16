@@ -28,10 +28,10 @@
       </script> 
     <!--Main content-->
     <p id="title" style="text-align:center;font-family: 'Press Start 2P', cursive;color: #E0E0E0;font-size: 2.00em;">NFT Game</p>
-    <p style="text-align:center;font-family: 'Press Start 2P', cursive;color: #E0E0E0;font-size: 0.8em;">Contract: 0xd2AB40279c57CCa86Ee5C8C0D1BFAd523E3c59E7</p>
+    <p style="text-align:center;font-family: 'Press Start 2P', cursive;color: #E0E0E0;font-size: 0.7em;">Contract: 0xd2AB40279c57CCa86Ee5C8C0D1BFAd523E3c59E7</p>
     <div id="tetris">
       <div id="menu">
-        <p onclick="walletLogin()" id="userAddress" style="cursor: pointer;padding: 5px;border:solid;font-size: 0.25em;font-family: 'Press Start 2P', cursive;">Connect Wallet</p> 
+        <p onclick="walletLogin()" id="userAddress" style="cursor: pointer;padding: 5px;border:solid;font-size: 0.5em;font-family: 'Press Start 2P', cursive;">Connect Wallet</p> 
         <p id="start" onclick="play()" id="logout" style="background-color: #04AA6D;cursor: pointer;padding: 10px;color: aliceblue;border:none;font-size: 0.7em;font-family: 'Press Start 2P', cursive;">Play</p> 
       
        
@@ -44,7 +44,9 @@
       <canvas id="canvas">
         Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
       </canvas>
+      
     </div>
+    <p id="userAddress2"></p>
 
     <!--NFT create form-->
 
@@ -57,33 +59,29 @@
       <div class="container">
 
         <label class="nftform" for="nft"><b>NFT Image File</b></label>
-        <input type="file" id="file" accept="image/*" class="nftinput" required><br><br>
+        <input type="file" id="file"  accept="image/*" class="nftinput" required><br>
     
-        <label class="nftform" for="nft"><b>IPFS Image Url</b></label>
-        <input type="text" class="nftinput" id="ipfsImage" readonly><br><br>
+        <input type="text" style="background-color: antiquewhite;color:rgb(51, 52, 49)" class="nftinput" placeholder="IPFS Image Url" id="ipfsImage" readonly><br>
 
-        <label class="nftform" for="filename"><b>Name</b></label>
         <input type="text" id="filename" class="nftinput" placeholder="Enter your nft name" name="filename" required>
 
-        <label class="nftform" for="filesocre"><b>Score</b></label>
-        <input id="filescore" class="nftinput" type="text" placeholder="" name="filesocre" readonly>
+        <label hidden class="nftform" for="filesocre"><b>Score</b></label>
+        <input style="background-color: antiquewhite; color:rgb(51, 52, 49)" hidden id="filescore" class="nftinput" type="text" placeholder="Your Score" name="filesocre" readonly>
 
-        <label class="nftform" for="fileraw"><b>Raw</b></label>
-        <input id="fileraws"  class="nftinput" type="text" placeholder="" name="fileraw" readonly>
+        <label hidden class="nftform" for="fileraw"><b>Raw</b></label>
+        <input style="background-color: antiquewhite; color:rgb(51, 52, 49)" hidden id="fileraws"  class="nftinput" type="text" placeholder="Your Raws" name="fileraw" readonly>
       
-        <label class="nftform"for="filedesc"><b>Description</b></label><br>
-        <textarea maxlength="500" id="desc"  class="nftinput" placeholder="I love this NFT !!!"></textarea>
+        <textarea maxlength="500" id="desc"  class="nftinput" placeholder="Any Description ...."></textarea>
         <button id="downloadMetaData" onclick="setMetaData()"  style="cursor: pointer;padding: 20px;border:solid;font-size: 0.7em;font-family: 'Press Start 2P', cursive;">Download Metadata</button>
         <hr><br>
         
         <label class="nftform" for="nft"><b>NFT Metadata File</b></label>
-        <input type="file" id="fileMetaData" accept=".json" class="nftinput" required><br><br>
-
-        <label class="nftform" for="nft"><b>IPFS Metadata Url</b></label>
-        <input type="text" class="nftinput" id="ipfsMetaData" readonly><br><br>
+        <input type="file" id="fileMetaData" accept=".json" class="nftinput" required><br>
+        <input type="text" class="nftinput" id="ipfsMetaData" placeholder="IPFS Metadata Url" readonly><br>
+       
 
         <button id="uploadMetaData" onclick="createNFT()" style="cursor: pointer;padding: 20px;border:solid;font-size: 0.7em;font-family: 'Press Start 2P', cursive;">Create NFT & Upload to Blockchain</button>
- 
+        <br><input type="text" class="nftinput" id="record" placeholder="Transaction Record" readonly>
     </div>
     <script>
       

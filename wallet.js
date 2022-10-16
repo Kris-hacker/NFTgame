@@ -2,34 +2,40 @@ window.userAddress = null;
 window.richAddress = null;
 window.richPrivatekey = null;
 window.onload = async () => {
-if (!window.ethereum){
+    if (!window.ethereum){
 
-    alert("You need install the MetaMask Wallet !");
-}
-    window.userAddress = window.localStorage.getItem("userAddress");
-if (!window.userAddress){
-    return false;
-}
-    document.getElementById("userAddress").textContent= `${window.userAddress}`;
-    const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
-        const account = accounts[0];
-    console.log(account)
-  
-}
+        alert("You need install the MetaMask Wallet !");
+    }
+        window.userAddress = window.localStorage.getItem("userAddress");
+        window.userAddress2 = window.localStorage.getItem("userAddress2");
+    if (!window.userAddress){
+        return false;
+    }
+        document.getElementById("userAddress").textContent = `${truncateAddress(window.userAddress)}`;
+        document.getElementById("userAddress2").textContent =`${window.userAddress2}`;
+       
+    }
+    
 
 async function walletLogin(){ 
     if (window.ethereum){
         const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
         const account = accounts[0];
         window.userAddress = account;
-        window.localStorage.setItem("userAddress",account);
-        document.getElementById("userAddress").textContent = `${window.userAddress}`;
-        console.log(document.getElementById("userAddress").value)
+        window.userAddress2 = account;
+        window.localStorage.setItem("userAddress",truncateAddress(account));
+        window.localStorage.setItem("userAddress2",account);
+        document.getElementById("userAddress").textContent = `${truncateAddress(window.userAddress)}`;
+        document.getElementById("userAddress2").textContent =`${window.userAddress2}`;
+
+        console.log(document.getElementById("userAddress").textContent)
+        console.log(document.getElementById("userAddress2").textContent)
         //getBalance();
     } else{
         alert("No Web3's wallet extension detected.");
     }
 }
+
 
 function truncateAddress(address) {
     if (!address) {
