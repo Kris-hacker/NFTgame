@@ -9,6 +9,7 @@ async function checkConnect() {
     const blockNumber = await web3.eth.getBlockNumber();
     console.log("My first exercise! The latest block number is " + blockNumber)
     console.log( window.userAddress)
+  
 
     // In the browser you can also output to the DOM:
     //document.getElementById("resultNFTcount").innerHTML += "My first exercise! The latest block number is " + blockNumber
@@ -40,23 +41,105 @@ async function getnft(){
     document.getElementById("count").textContent =  nfts.totalCount;
     console.log("...");
     console.log(nfts.totalCount);
+    const hexToDecimal = hex => parseInt(hex, 16);
+    let shortCID = '';
     // Print contract address and tokenId for each NFT:
+    let rs = ` <div class="container">`;
     for (const nft of nfts.ownedNfts) {
         console.log("===");
-        console.log("name:", nft.metadata.name);
-        console.log("description:", nft.description);
-        console.log("score:", nft.metadata.attributes[0].value);
-        console.log("raws:", nft.metadata.attributes[1].value);
-        console.log("image:", nft.metadata.image);
-        console.log("create date:", nft.timeLastUpdated);
-        console.log("ipfs:", nft.tokenUri.gateway);
-        console.log("contract address:", nft.contract.address);
+        
+
         console.log("token ID:", nft.id.tokenId);
+        console.log("create date:", nft.timeLastUpdated);
+        console.log("nft ipfs:", nft.tokenUri.gateway);
+        console.log("contract address:", nft.contract.address);
         console.log("creater:", nft.contract.address);
+
+        const request = new Request(nft.tokenUri.gateway)
+        const response = await fetch(request);
+        const superHeroes = await response.json();
+        console.log("description :",superHeroes.description);
+        console.log("name :",superHeroes.name);
+        console.log("image :",superHeroes.image);
+        console.log("Score :",superHeroes.attributes[0].value);
+        console.log("Raws :",superHeroes.attributes[1].value);
+        console.log(superHeroes);
+
+        shortCID = nft.tokenUri.gateway.replace('https://ipfs.io/ipfs/','');
+
+
+        rs += `
+        <div class="card" style="display:flex">
+            <div class="card__header"> 
+                <img src="${superHeroes.image}" alt="card__image" class="card__image" width="1000">
+            </div>
+          <div class="card__body">
+            <div style="display:flex">
+                <span class="tag tag-blue">NFT</span>
+                <span class="tag tag-red">simToken</span>
+                <span class="tag tag-brown">${nft.timeLastUpdated}</span>
+            </div>
+            <div style="padding-top: 10px;padding-bottom: 10px;">
+                <h4>${superHeroes.name}</h4>
+                <p>${superHeroes.description}</p>
+            </div>
+                <div class="user__info" >
+                    <div style="display:flex">
+                        <div>
+                            <h5>Score</h5>
+                            <small>${superHeroes.attributes[0].value}</small>
+                            <h5>Contract</h5>
+                            <small>${nft.contract.address}</small>
+                         
+                            
+                        </div>
+                        <div style="padding-left:40px;">
+                        <h5>Raws</h5>
+                        <small>${superHeroes.attributes[1].value}</small>
+                   
+                        <h5>ID</h5>
+                    <small>${hexToDecimal(nft.id.tokenId)}</small>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div class="card__footer">
+                <div class="user">
+                    <div class="user__info">
+                    
+                    </div>
+                </div>
+          </div>
+          <div class="card__footer">
+            <div class="user">
+              <div class="user__info">
+                <h5>IPFS CID</h5>
+                <small>${shortCID}</small>
+              </div>
+            </div>
+          </div>
+          </div>`;
+
     }
+
+    rs += "</div>"
+    document.getElementById("nftcontent").innerHTML = rs;
+
     console.log("===");
     console.log(nfts);
 }
+
+async function nftJSONData(tokenUri) {
+
+    const requestURL = tokenUri;
+    const request = new Request(requestURL);
+  
+    const response = await fetch(request);
+    const superHeroes = await response.json();
+  
+    return superHeroes.description
+  
+  }
 
 async function getnftList(){
     const ownerAddr = document.getElementById("userAddress2").textContent;
@@ -78,24 +161,24 @@ async function getnftList(){
         console.log("token ID:", nft.id.tokenId);
         console.log("Image url:", nft.metadata.image);
 
-        // rs += "<div style=\"display:flex\">"+
-        //             "<div>"+
-        //                 "Title:"+nft.title+"<br>"+
-        //                 "Description:"+nft.description+"<br>"+
-        //                 "Contract address:"+nft.contract.address+"<br>"+
-        //                 "Token ID:"+nft.id.tokenId+"<br>"+
-        //                 "Image url:"+nft.metadata.image+"<br>"+
+        rs += "<div style=\"display:flex\">"+
+                    "<div>"+
+                        "Title:"+nft.title+"<br>"+
+                        "Description:"+nft.description+"<br>"+
+                        "Contract address:"+nft.contract.address+"<br>"+
+                        "Token ID:"+nft.id.tokenId+"<br>"+
+                        "Image url:"+nft.metadata.image+"<br>"+
                         
-        //             "</div>"+
-        //             "<div style=\"padding-left:10px\">"+
-        //                 "<img src=\""+nft.metadata.image+"\" width=\"190px\">"+                                  
-        //             "</div>"+
-        //         "</div>"+
-        //         "<hr style=\"margin-bottom:30px;padding-bottom:5px; background-color: white\" >";
+                    "</div>"+
+                    "<div style=\"padding-left:10px\">"+
+                        "<img src=\""+nft.metadata.image+"\" width=\"190px\">"+                                  
+                    "</div>"+
+                "</div>"+
+                "<hr style=\"margin-bottom:30px;padding-bottom:5px; background-color: white\" >";
 
 
     }
-    // rs += "</table>"
+     rs += "</table>"
     // document.getElementById("NFT_list_details").innerHTML = rs;
     console.log("===");
     console.log(nfts);
@@ -479,6 +562,8 @@ async function mintNFT(tokenURI) {
         "deployedLinkReferences": {}
       }
       
+      
+      
 
     console.log(contract);
     console.log(contract.abi);
@@ -486,11 +571,11 @@ async function mintNFT(tokenURI) {
 
 //-------------------------------------------------End the abi -------------------------------------------------------------------
 
-    const contractAddress = "0xd2AB40279c57CCa86Ee5C8C0D1BFAd523E3c59E7";
+    const contractAddress = "0x1597b142Ebf843E98819C41f610548117E90Df60";
     const nftContract = new web3.eth.Contract(contract.abi, contractAddress);
 
     const PUBLIC_KEY = document.getElementById("userAddress2").textContent;
-    const PRIVATE_KEY = "d137d6296459d0a177ee425364457c5ae33b8aef1d44fe6d00c9826153d11cfb";
+    const PRIVATE_KEY = "9f3251616276e37238958e75d0040a9f6d842b677245a96f87bc2d21e5ae6e11";
 
     console.log(document.getElementById("userAddress2").textContent)
 
@@ -520,10 +605,11 @@ async function mintNFT(tokenURI) {
                 document.getElementById("record").value = "https://goerli.etherscan.io/tx/" + hash ;
             console.log(hash)
             } else {
-            console.log(
-                "Something went wrong when submitting your transaction:",
-                err
-            )
+                console.log(
+                    "Something went wrong when submitting your transaction:",
+                    err
+                )
+                document.getElementById("record").value = err
             }
         }
         )
