@@ -75,9 +75,9 @@ async function getnft(){
             </div>
           <div class="card__body">
             <div style="display:flex">
-                <span class="tag tag-blue">NFT</span>
-                <span class="tag tag-red">simToken</span>
-                <span class="tag tag-brown">${nft.timeLastUpdated}</span>
+                <span class="tag tag-blue">${nft.contractMetadata.symbol}</span>
+                <span class="tag tag-red">${nft.contractMetadata.name}</span>
+                <span class="tag tag-brown">${nft.contractMetadata.tokenType}</span>
             </div>
             <div style="padding-top: 10px;padding-bottom: 10px;">
                 <h4>${superHeroes.name}</h4>

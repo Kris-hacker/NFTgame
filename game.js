@@ -204,7 +204,7 @@
     function lose() { 
       show('start'); setVisualScore(); 
       playing = false; 
-      alert("You lost the game");
+      alert("Lose the game");
       const nft_image = document.querySelector("#canvas");
       const dataURL = nft_image.toDataURL();
       console.log(dataURL)
