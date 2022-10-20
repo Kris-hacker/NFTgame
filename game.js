@@ -169,6 +169,10 @@
       invalidate();
       invalidateNext();
     }
+    var leftKey     = { LEFT: 37};
+    var upKey     = { UP: 38 };
+    var rightKey     = { RIGHT: 39 };
+    var downKey     = { DOWN: 40 };
 
     function keydown(ev) {
       var handled = false;

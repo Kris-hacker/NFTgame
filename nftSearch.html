@@ -22,12 +22,30 @@
 
   <body onclick="getnft()">
     <!--NavBar-->
-    <div id="navbar"></div>
-    <script> 
-      $(function(){
-        $("#navbar").load("navbar.html"); 
-      });
-      </script> 
+    <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 10px;
+      }
+      
+           
+      li {
+        display: inline;
+        padding: 10px;
+        background-color: rgb(12, 171, 233);
+        border-radius: 10px;
+      }
+
+      </style>
+      
+      <ul>
+        <li><a href="index.html">Game</a></li>
+        <li><a href="nftSearch.html">NFT</a></li>
+        <li><a href="#contact">Gas</a></li>
+      </ul>
+
+
     <!--Main content-->
     <p id="title" style="text-align:center;font-family: 'Press Start 2P', cursive;color: #000000;font-size: 2.00em;padding: 20px;">NFT Storage</p>
     <p style="text-align:center;font-family: 'Press Start 2P', cursive;color: #000000;font-size: 0.7em;">Contract: 0x1597b142Ebf843E98819C41f610548117E90Df60</p><br>
@@ -58,7 +76,6 @@
     <script src="stats.js"></script>
     <script src="wallet.js"></script>
     <script src="game.js"></script>
-    <script src="navbar.js"></script>
     <script src="ipfs.js"></script>
     <script src="alchemy.js"></script>
 

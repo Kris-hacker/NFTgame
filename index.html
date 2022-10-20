@@ -21,12 +21,37 @@
 
   <body style="background: url(https://i.redd.it/408ryru2vzty.jpg);background-size: cover;background-position: center;background-repeat: no-repeat;">
     <!--NavBar-->
-    <div id="navbar"></div>
-    <script> 
-      $(function(){
-        $("#navbar").load("navbar.html"); 
-      });
-      </script> 
+    <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 10px;
+      }
+      
+           
+      li {
+        display: inline;
+        padding: 10px;
+        background-color: #FFF;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+
+      li:hover {
+        display: inline;
+        padding: 10px;
+        background-color: rgb(22, 20, 20);
+        border-radius: 10px;
+      }
+
+      </style>
+      
+      <ul>
+        <li><a href="index.html">Game</a></li>
+        <li><a href="nftSearch.html">NFT</a></li>
+        <li><a href="#contact">Gas</a></li>
+      </ul>
+
     <!--Main content-->
     <p id="title" style="text-align:center;font-family: 'Press Start 2P', cursive;color: #E0E0E0;font-size: 2.00em;">NFT Game</p>
     <p style="text-align:center;font-family: 'Press Start 2P', cursive;color: #E0E0E0;font-size: 0.7em;">Contract: 0x1597b142Ebf843E98819C41f610548117E90Df60</p>
@@ -40,11 +65,61 @@
         <p style="font-family: 'Press Start 2P', cursive;">score<br> <span id="score" style="font-size: .7em;font-family: 'Press Start 2P', cursive;">000000</span></p>
         <p style="font-family: 'Press Start 2P', cursive;">rows<br> <span id="rows" style="font-size: 0.7em;font-family: 'Press Start 2P', cursive;">0</span></p>
         <p><button onclick="document.getElementById('id01').style.display='block'" style="cursor: pointer;padding: 10px;border:solid;font-size: 0.7em;font-family: 'Press Start 2P', cursive;">Create NFT</button></p>
-        <p onclick="logout()" id="logout" style="cursor: pointer;padding: 5px;border:solid;font-size: 0.5em;font-family: 'Press Start 2P', cursive;">Logout</p> 
+       
+      <ul>
+        <li style=" font-size: 20px;"><small onclick="leftkey()">LEFT</small></li>
+        <li style=" font-size: 20px;"><small onclick="rightkey()">RIGHT</small></li>
+        <li style="  font-size: 20px;"><small onclick="upkey()">CHANGE</small></li>
+        <li style="  font-size: 20px;"><small onclick="downkey()">FASTER</small></li>
+      </ul>
+      <script>
+
+        var KEY  = { LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40 } ;
+
+        async function leftkey(){
+          KEY.LEFT = 37;
+          console.log("hi");
+          actions.push(DIR.LEFT);  handled = true;
+          ev.preventDefault();
+        }
+
+        async function upkey(){
+
+          var KEY  = { LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40 } ;
+
+          KEY.UP = 38;
+          console.log("hi");
+          actions.push(DIR.UP);  handled = true;
+          ev.preventDefault();
+        }
+
+        async function rightkey(){
+
+          var KEY  = { LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40 } ;
+
+          KEY.RIGHT = 38;
+          console.log("hi");
+          actions.push(DIR.RIGHT);  handled = true;
+          ev.preventDefault();
+        }
+
+        async function downkey(){
+
+          var KEY  = { LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40 } ;
+
+          KEY.DOWN = 38;
+          console.log("hi");
+          actions.push(DIR.DOWN);  handled = true;
+          ev.preventDefault();
+        }
+
+      </script>
+
       </div>
       <canvas id="canvas">
         Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
       </canvas>
+
       
     </div>
     <p id="userAddress2"></p>
@@ -94,7 +169,6 @@
     <script src="stats.js"></script>
     <script src="wallet.js"></script>
     <script src="game.js"></script>
-    <script src="navbar.js"></script>
     <script src="ipfs.js"></script>
     <script src="alchemy.js"></script>
 
